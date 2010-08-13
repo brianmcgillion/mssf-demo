@@ -1,0 +1,7 @@
+interface: Libcreds2-Qt
+libs-pkg: libcreds2-qt
+dev-pkg: libcreds2-qt-dev
+type: library
+headers: /usr/include/libcreds2-qt/*
+state: unstable
+scope: Nokia MeeGo

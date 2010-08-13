@@ -1,0 +1,27 @@
+Source: libcreds2-qt
+Priority: optional
+Maintainer: Brian McGillion <brian.mcgillion@symbio.com>
+Build-Depends: debhelper (>= 5), libqt4-dev (>= 4.5), libdbus-1-dev, libcreds2-dev
+Standards-Version: 3.8.1
+Section: libs
+Homepage: <insert the upstream URL, if relevant>
+
+Package: libcreds2-qt
+Section: libs
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: A Qt convenience wrapper around libcreds2.
+
+Package: libcreds2-qt-dev
+Section: libdevel
+Architecture: any
+Depends: libcreds2-qt (= ${binary:Version})
+Description: Development related files for libcreds2-qt.
+
+Package: libcreds2-qt-dbg
+Section: libdevel
+Priority: extra
+Architecture: any
+Depends: libcreds2-qt (= ${binary:Version}), ${misc:Depends}
+Description: libcreds2-qt Library debug symbols
+ Debug symbols for libcreds2-qt library.

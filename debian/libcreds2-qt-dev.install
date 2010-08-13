@@ -1,0 +1,4 @@
+/usr/include/libcreds2-qt/*
+/usr/lib/lib*.so
+/usr/lib/pkgconfig/*
+/usr/share/qt4/mkspecs/features/*

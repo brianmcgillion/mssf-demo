@@ -1,0 +1,11 @@
+prefix=/usr
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: Libcreds2-Qt
+Description: Qt utility library for the libcreds2 security framework.
+Version: 0.0.1
+Requires: QtCore >= 4.5, QtDBus >= 4.5
+Libs: -L${libdir} -lcreds2-qt
+Cflags: -I${includedir}/libcreds2-qt

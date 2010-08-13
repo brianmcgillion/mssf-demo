@@ -1,0 +1,6 @@
+prefix=/usr
+exec_prefix=$${prefix}
+
+DEPENDPATH += $${prefix}/include/libcreds2-qt
+INCLUDEPATH += $${prefix}/include/libcreds2-qt
+LIBS += -L $${exec_prefix}/lib -lcreds2-qt
