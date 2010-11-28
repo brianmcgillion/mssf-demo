@@ -25,7 +25,7 @@
 
 #include <QtCore/qglobal.h>
 
-#if defined(LIBCREDSQT_LIBRARY)
+#if defined(LIBCREDS2QT_LIBRARY)
 #  define LIBCREDS2QTSHARED_EXPORT Q_DECL_EXPORT
 #else
 #  define LIBCREDS2QTSHARED_EXPORT Q_DECL_IMPORT
