@@ -2,6 +2,8 @@
   <request>
     <credential name="mssf-demo::encrypt" />
     <credential name="mssf-demo::StateSetter" />
+    <credential name="mssf-demo::Stop_State" />
+    <credential name="mssf-demo::Clean_State" />
     <for path="/usr/bin/mssf-client" />
   </request>
 </aegis>
