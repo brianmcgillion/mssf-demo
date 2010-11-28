@@ -1,0 +1,4 @@
+[D-BUS Service]
+User=brian
+Name=com.meego.mssf
+Exec=/usr/bin/mssfd
