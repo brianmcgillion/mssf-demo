@@ -2,8 +2,9 @@ QT       += core dbus network
 QT       -= gui
 
 TARGET = mssfd
-CONFIG   += console
+CONFIG   += console link_pkgconfig
 CONFIG   -= app_bundle
+PKGCONFIG += aegis-crypto
 TEMPLATE = app
 
 SOURCES += main.cpp \
@@ -11,7 +12,8 @@ SOURCES += main.cpp \
     configuration.cpp \
     dbusservice.cpp \
     engine.cpp \
-    configwriter.cpp
+    configwriter.cpp \
+    aegiscrypto.cpp
 
 HEADERS += \
     dbusserviceifadaptor.h \
@@ -21,12 +23,14 @@ HEADERS += \
     engine.h \
     engineconfigs.h \
     mssf-common.h \
-    configwriter.h
+    configwriter.h \
+    aegiscrypto.h
 
 OTHER_FILES += \
     com.meego.mssf.xml \
     com.meego.mssf.service \
-    com.meego.mssf.conf
+    com.meego.mssf.conf \
+    mssf-demo.aegis.xml
 
 target.path = $$(DESTDIR)/usr/bin
 

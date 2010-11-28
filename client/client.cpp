@@ -40,7 +40,7 @@ Client::~Client()
 
 void Client::run()
 {
-    // Connect via Dbus and set the state
+    // Connect vis Dbus and set the state
     // call all usable states
     dbusClient = new ServerDBus(this);
     dbusClient->setState(Mssf::Running);
@@ -56,7 +56,7 @@ void Client::run()
     QByteArray data;
     QDataStream stream(&data, QIODevice::WriteOnly);
     stream << (quint8)1; // version
-    stream << (qint32)(0);
+    stream << static_cast<qint32>(Mssf::Running);
 
     clientSock->write(data);
     clientSock->flush();

@@ -22,6 +22,7 @@
 
 #include "configwriter.h"
 #include "engineconfigs.h"
+#include "aegiscrypto.h"
 
 #include <QtCore/QByteArray>
 #include <QtCore/QDataStream>
@@ -30,6 +31,8 @@
 
 // the file into which the settings will be stored
 const char * const filename = "/tmp/mssf-demo.storage";
+// Token used for encrypting data, Use NULL to signify the use of ApplicationID
+const char * const encryptToken = NULL;
 
 ConfigWriter::ConfigWriter()
 {
@@ -55,8 +58,8 @@ bool ConfigWriter::writeConfig(const Configuration &config)
     QDataStream structStream(&data, QIODevice::WriteOnly);
     structStream << config;
 
-    //write the data to file
-    fileStream << data;
+    //write the encrypted data to file
+    fileStream << AegisCrypto::encryptData(data, encryptToken);
     return true;
 }
 
@@ -79,7 +82,7 @@ Configuration ConfigWriter::readConfig()
         return Configuration();
     }
 
-    QDataStream byteStream(data);
+    QDataStream byteStream(AegisCrypto::decryptData(data, encryptToken));
     // de-serialize the data
     Configuration config;
     byteStream >> config;
