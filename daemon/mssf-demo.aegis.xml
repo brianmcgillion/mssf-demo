@@ -25,6 +25,11 @@
             Allow the caller to set the state to cleaning.
          </docstring>
      </credential>
+     <credential name="SocketSetter">
+         <docstring>
+            Allow the socket client to set the state.
+         </docstring>
+     </credential>
      <dbus name="com.meego.mssf" own="MssfDBusServiceOwn" bus="system">
            <node name="/">
              <interface name="com.meego.mssf">

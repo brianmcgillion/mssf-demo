@@ -45,6 +45,8 @@ enum State
 const char * const serverName = "/tmp/mssf.socket";
 //! A shared token used to encrypt data between client and server.
 const char * const  tokenName = "mssf-demo::encrypt";
+//! Token to allow a socket to set the state.
+const char * const SocketSetter = "mssf-demo::SocketSetter";
 }
 
 //! Serialization for \a Mssf::State

@@ -30,6 +30,8 @@
 
 #include <QtNetwork/QLocalSocket>
 
+#include <CredentialsManager>
+
 Engine::Engine(QObject *parent)
     :  QObject(parent),
       dbusService(NULL),
@@ -115,23 +117,30 @@ void Engine::handleConnection()
 
     bool result = false;
     qint32 state = Mssf::Undefined;
-
-    if (sockClient->waitForReadyRead())
+    QString errorString;
+    if (!CredentialsManager::hasSocketCredential(sockClient->socketDescriptor(), Mssf::SocketSetter, &errorString))
     {
-        QDataStream stream(sockClient);
-        quint8 version;
-        stream >> version;
-
-        if (version == 1)
-        {
-            // read the state from the client and attempt to set it
-            stream >> state;
-            result = setState(state);
-        }
+        qDebug() << "Failed to validate credential: " << errorString;
     }
     else
     {
-        qDebug() << "There is no data available on the socket ??";
+        if (sockClient->waitForReadyRead())
+        {
+            QDataStream stream(sockClient);
+            quint8 version;
+            stream >> version;
+
+            if (version == 1)
+            {
+                // read the state from the client and attempt to set it
+                stream >> state;
+                result = setState(state);
+            }
+        }
+        else
+        {
+            qDebug() << "There is no data available on the socket ??";
+        }
     }
 
     // Now write the result back to the client
