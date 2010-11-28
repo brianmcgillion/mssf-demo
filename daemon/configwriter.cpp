@@ -22,17 +22,16 @@
 
 #include "configwriter.h"
 #include "engineconfigs.h"
-#include "aegiscrypto.h"
+#include "aegisstorage.h"
 
 #include <QtCore/QByteArray>
 #include <QtCore/QDataStream>
-#include <QtCore/QFile>
 #include <QtCore/QtDebug>
 
-// the file into which the settings will be stored
+//! The storage file location used for the standard configuration settings
+const char * const MssfStorageName = "MssfStorage";
+//! The file path that is used within aegis crypto to store these settings.
 const char * const filename = "/tmp/mssf-demo.storage";
-// Token used for encrypting data, Use NULL to signify the use of ApplicationID
-const char * const encryptToken = NULL;
 
 ConfigWriter::ConfigWriter()
 {
@@ -44,46 +43,24 @@ ConfigWriter::~ConfigWriter()
 
 bool ConfigWriter::writeConfig(const Configuration &config)
 {
-    // use a file in the normal file system
-    QFile storageFile(filename);
-    if (!storageFile.open(QIODevice::ReadWrite | QIODevice::Truncate))
-    {
-        qDebug() << "Failed to open the settings file: " << storageFile.error();
-        return false;
-    }
-
-    QDataStream fileStream(&storageFile);
-    // Serialize the configuration to aa array
+    // Serialize the configuration to an array
     QByteArray data;
     QDataStream structStream(&data, QIODevice::WriteOnly);
     structStream << config;
 
-    //write the encrypted data to file
-    fileStream << AegisCrypto::encryptData(data, encryptToken);
-    return true;
+    // using NULL as a token means that the APPLICATION ID is used internally
+    return AegisStorage::aegisStorageWrite(MssfStorageName, filename, NULL, data);
 }
 
 Configuration ConfigWriter::readConfig()
 {
-    QFile storageFile(filename);
-    if (!storageFile.open(QIODevice::ReadOnly))
-    {
-        qDebug() << "Failed to open the settings file: "  << storageFile.error();
-        return Configuration();
-    }
-
-    QDataStream fileStream(&storageFile);
-    QByteArray data;
-    fileStream >> data;
+    QByteArray data = AegisStorage::aegisStorageGet(MssfStorageName, filename, NULL);
 
     if (data.isEmpty())
-    {
-        qDebug() << "Failed to read the data from file.";
         return Configuration();
-    }
 
-    QDataStream byteStream(AegisCrypto::decryptData(data, encryptToken));
     // de-serialize the data
+    QDataStream byteStream(data);
     Configuration config;
     byteStream >> config;
 

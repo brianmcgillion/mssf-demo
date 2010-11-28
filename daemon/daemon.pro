@@ -13,7 +13,7 @@ SOURCES += main.cpp \
     dbusservice.cpp \
     engine.cpp \
     configwriter.cpp \
-    aegiscrypto.cpp
+    aegisstorage.cpp
 
 HEADERS += \
     dbusserviceifadaptor.h \
@@ -24,13 +24,12 @@ HEADERS += \
     engineconfigs.h \
     mssf-common.h \
     configwriter.h \
-    aegiscrypto.h
+    aegisstorage.h
 
 OTHER_FILES += \
     com.meego.mssf.xml \
     com.meego.mssf.service \
-    com.meego.mssf.conf \
-    mssf-demo.aegis.xml
+    com.meego.mssf.conf
 
 target.path = $$(DESTDIR)/usr/bin
 

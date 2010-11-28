@@ -41,12 +41,12 @@ Client::~Client()
 void Client::run()
 {
     // Connect vis Dbus and set the state
-    // call all usable states
     dbusClient = new ServerDBus(this);
     dbusClient->setState(Mssf::Running);
     dbusClient->setState(Mssf::Stopped);
     dbusClient->setState(Mssf::ReStart);
     dbusClient->setState(Mssf::Clean);
+
 
     // perform a write using the Socket connection
     clientSock = new QLocalSocket(this);

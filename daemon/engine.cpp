@@ -26,7 +26,6 @@
 #include "dbusserviceifadaptor.h"
 #include "mssf-common.h"
 #include "configwriter.h"
-#include "aegiscrypto.h"
 
 #include <QtNetwork/QLocalSocket>
 
@@ -46,15 +45,13 @@ Engine::~Engine()
 
 bool Engine::initialize()
 {
-    if (!AegisCrypto::initialize())
-        qDebug() << "Failed to initialize Aegis Crypto";
-
     config.setName("MainEngine");
     config.setType(EngineSettings::Category);
     config.insertField(EngineSettings::State, QVariant(static_cast<int>(Mssf::Stopped)));
 
     storage = new ConfigWriter();
     Configuration storedConfig = storage->readConfig();
+
     //combine the stored config
     config.insertFields(storedConfig.fields());
 
