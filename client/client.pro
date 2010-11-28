@@ -4,7 +4,7 @@ QT       -= gui
 TARGET = mssf-client
 CONFIG   += console link_pkgconfig
 CONFIG   -= app_bundle
-PKGCONFIG += aegis-crypto
+PKGCONFIG += aegis-crypto mssf-shared-lib
 TEMPLATE = app
 
 INCLUDEPATH += /usr/include/mssf/

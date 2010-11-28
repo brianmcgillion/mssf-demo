@@ -1,2 +1,2 @@
 TEMPLATE = subdirs
-SUBDIRS = daemon client
+SUBDIRS = daemon client mssf-shared-lib

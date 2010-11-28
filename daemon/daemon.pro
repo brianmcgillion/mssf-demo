@@ -4,7 +4,7 @@ QT       -= gui
 TARGET = mssfd
 CONFIG   += console link_pkgconfig
 CONFIG   -= app_bundle
-PKGCONFIG += aegis-crypto libcreds2-qt
+PKGCONFIG += aegis-crypto libcreds2-qt mssf-shared-lib
 TEMPLATE = app
 
 SOURCES += main.cpp \

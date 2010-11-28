@@ -30,6 +30,11 @@
             Allow the socket client to set the state.
          </docstring>
      </credential>
+     <credential name="DaemonLibraryAccess">
+         <docstring>
+            Allow the daemon to access the proper methods in the shared library.
+         </docstring>
+     </credential>
      <dbus name="com.meego.mssf" own="MssfDBusServiceOwn" bus="system">
            <node name="/">
              <interface name="com.meego.mssf">
@@ -45,6 +50,7 @@
     <credential name="mssf-demo::encrypt" />
     <credential name="mssf-demo::MssfDBusServiceOwn" />
     <credential name="mssf-demo::StateSetter" />
+    <credential name="mssf-demo::DaemonLibraryAccess" />
     <credential name="UID::brian" />
     <credential name="GRP::users" />
     <credential name="GRP::floppy" />

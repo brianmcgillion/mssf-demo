@@ -1,10 +1,18 @@
 <aegis>
+  <provide>
+     <credential name="ClientLibraryAccess">
+         <docstring>
+            A Token To allow the client to access the shared library method.
+         </docstring>
+     </credential>
+  </provide>
   <request>
     <credential name="mssf-demo::encrypt" />
     <credential name="mssf-demo::StateSetter" />
     <credential name="mssf-demo::Stop_State" />
     <credential name="mssf-demo::Clean_State" />
     <credential name="mssf-demo::SocketSetter" />
+    <credential name="mssf-demo::ClientLibraryAccess" />
     <for path="/usr/bin/mssf-client" />
   </request>
 </aegis>

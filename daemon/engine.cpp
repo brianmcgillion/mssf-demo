@@ -31,6 +31,7 @@
 #include <QtNetwork/QLocalSocket>
 
 #include <CredentialsManager>
+#include <MssfSharedLib>
 
 Engine::Engine(QObject *parent)
     :  QObject(parent),
@@ -61,6 +62,13 @@ bool Engine::initialize()
     config.insertFields(storedConfig.fields());
 
     qDebug() << " The state after reading the stored config is: " << config.value(EngineSettings::State);
+
+    //access the shared library
+    MssfSharedLib sharedLib;
+    //The following call will succeed because we have the token in our manifest.
+    sharedLib.daemonMethod();
+    //the following method will fail becasue we do not have permission to call this method.
+    sharedLib.clientMethod();
 
     sockServer = new QLocalServer(this);
     // clean up the old instance if it exists.

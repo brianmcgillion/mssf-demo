@@ -1,0 +1,11 @@
+prefix=/usr
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: mssf-shared-lib
+Description: A Library to demonstrate the use of credential checking.
+Version: 0.0.1
+Requires: QtCore >= 4.5
+Libs: -L${libdir} -lmssf-shared-lib
+Cflags: -I${includedir}/mssf-shared-lib

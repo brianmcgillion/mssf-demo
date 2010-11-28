@@ -27,6 +27,8 @@
 
 #include <QtCore/QDataStream>
 
+#include <MssfSharedLib>
+
 Client::Client(QObject *parent)
     :   QObject(parent),
       clientSock(NULL),
@@ -41,6 +43,13 @@ Client::~Client()
 void Client::run()
 {
     AegisCrypto::initialize();
+
+    //access the shared library
+    MssfSharedLib sharedLib;
+    //The following call will succeed because we have the token in our manifest.
+    sharedLib.clientMethod();
+    //the following method will fail becasue we do not have permission to call this method.
+    sharedLib.daemonMethod();
 
     // Connect via Dbus and set the state
     // call all usable states
