@@ -31,7 +31,6 @@ HEADERS += \
 OTHER_FILES += \
     com.meego.mssf.xml \
     com.meego.mssf.service \
-    com.meego.mssf.conf \
     mssf-demo.aegis.xml
 
 target.path = $$(DESTDIR)/usr/bin

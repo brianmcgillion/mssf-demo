@@ -41,9 +41,9 @@ enum State
     Undefined                /*!< Undefined - The state of the lock is unknown or the lock does not exist */
 };
 
-//! The address that hte daemon will use
+//! The address that the daemon will use
 const char * const serverName = "/tmp/mssf.socket";
-
+//! A shared token used to encrypt data between client and server.
 const char * const  tokenName = "mssf-demo::encrypt";
 }
 
