@@ -22,7 +22,7 @@
 
 #include "client.h"
 #include "serverdbus.h"
-
+#include "../daemon/aegiscrypto.h"
 #include "../daemon/mssf-common.h"
 
 #include <QtCore/QDataStream>
@@ -40,7 +40,10 @@ Client::~Client()
 
 void Client::run()
 {
+    AegisCrypto::initialize();
+
     // Connect vis Dbus and set the state
+    // call all usable states
     dbusClient = new ServerDBus(this);
     dbusClient->setState(Mssf::Running);
     dbusClient->setState(Mssf::Stopped);
@@ -64,19 +67,25 @@ void Client::run()
 
 void Client::readSocket()
 {
-    QDataStream response(clientSock);
-
     if (clientSock->bytesAvailable() > 0)
     {
-        quint8 version;
-        response >> version;
+        QByteArray data = clientSock->readAll();
+        if (data.isEmpty())
+        {
+            qDebug() << "Failed to read the data from socket.";
+            return;
+        }
 
+        QDataStream byteStream(AegisCrypto::decryptData(data, Mssf::tokenName));
+
+        quint8 version;
+        byteStream >> version;
         if (version == 1)
         {
             bool success;
             qint32 state;
-            response >> state;
-            response >> success;
+            byteStream >> state;
+            byteStream >> success;
             qDebug() << "Received response from socket for state (" << state << "): " << success;
         }
     }

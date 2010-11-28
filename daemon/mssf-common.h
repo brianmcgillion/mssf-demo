@@ -44,6 +44,7 @@ enum State
 //! The address that hte daemon will use
 const char * const serverName = "/tmp/mssf.socket";
 
+const char * const  tokenName = "mssf-demo::encrypt";
 }
 
 //! Serialization for \a Mssf::State

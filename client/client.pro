@@ -2,8 +2,9 @@ QT       += core dbus network
 QT       -= gui
 
 TARGET = mssf-client
-CONFIG   += console
+CONFIG   += console link_pkgconfig
 CONFIG   -= app_bundle
+PKGCONFIG += aegis-crypto
 TEMPLATE = app
 
 INCLUDEPATH += /usr/include/mssf/
@@ -11,16 +12,17 @@ INCLUDEPATH += /usr/include/mssf/
 SOURCES += main.cpp \
     mssfdbusif.cpp \
     serverdbus.cpp \
-    client.cpp
+    client.cpp \
+    ../daemon/aegiscrypto.cpp
 
 HEADERS += mssfdbusif.h \
     serverdbus.h \
-    client.h
-
-
-OTHER_FILES +=
-
+    client.h \
+    ../daemon/aegiscrypto.h
 
 target.path = $$(DESTDIR)/usr/bin
 
 INSTALLS += target
+
+OTHER_FILES += \
+    client.aegis.xml

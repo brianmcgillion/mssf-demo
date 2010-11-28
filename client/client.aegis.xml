@@ -1,0 +1,6 @@
+<aegis>
+  <request>
+    <credential name="mssf-demo::encrypt" />
+    <for path="/usr/bin/mssf-client" />
+  </request>
+</aegis>

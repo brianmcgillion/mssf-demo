@@ -1,0 +1,17 @@
+<aegis>
+  <provide>
+     <credential name="encrypt">
+         <docstring>
+            A Token that is used for encrypting data.
+         </docstring>
+     </credential>
+  </provide>
+  <request>
+    <credential name="mssf-demo::encrypt" />
+    <credential name="UID::brian" />
+    <credential name="GRP::users" />
+    <credential name="GRP::floppy" />
+    <credential name="CAP::sys_admin" />
+    <for path="/usr/bin/mssfd" />
+  </request>
+</aegis>
