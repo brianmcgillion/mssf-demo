@@ -15,6 +15,16 @@
             Allow calling of the B-Bus method setState()
          </docstring>
      </credential>
+     <credential name="Stop_State">
+         <docstring>
+            Allow the caller to stop the daemon.
+         </docstring>
+     </credential>
+     <credential name="Clean_State">
+         <docstring>
+            Allow the caller to set the state to cleaning.
+         </docstring>
+     </credential>
      <dbus name="com.meego.mssf" own="MssfDBusServiceOwn" bus="system">
            <node name="/">
              <interface name="com.meego.mssf">

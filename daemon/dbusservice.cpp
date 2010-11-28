@@ -24,6 +24,12 @@
 #include "engine.h"
 #include "mssf-common.h"
 
+//access libcreds2
+#include <DBusContextAccessManager>
+
+#include <QtCore/QString>
+#include <QtCore/QLatin1String>
+
 DBusService::DBusService(Engine *parent)
     :   QObject(parent),
       engine(parent)
@@ -38,6 +44,33 @@ bool DBusService::setState(int state)
 {
     if (state >= Mssf::Undefined)
         sendErrorReply(QDBusError::NotSupported, "Unknown state requested");
+
+    QString credential;
+    switch ((Mssf::State)state)
+    {
+    case Mssf::Clean:
+        credential = QLatin1String("mssf-demo::Clean_State");
+        break;
+    case Mssf::Stopped:
+        credential = QLatin1String("mssf-demo::Stop_State");
+        break;
+    default:
+        break;
+    }
+
+    qDebug("The clients id is (%d)", (int)DBusContextAccessManager::getClientPID(*this));
+
+    if (!credential.isEmpty())
+    {
+        //not all states changes require a token
+        QString errorString;
+        if (!DBusContextAccessManager::hasClientCredential(*this, credential, &errorString))
+        {
+            qDebug() << "Failed to validate credential: " << errorString;
+            sendErrorReply(QDBusError::AccessDenied, "Caller does not possess the correct credentials");
+            return false;
+        }
+    }
 
     return engine->setState(state);
 }
