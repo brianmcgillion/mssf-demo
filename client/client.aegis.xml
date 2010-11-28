@@ -4,6 +4,7 @@
     <credential name="mssf-demo::StateSetter" />
     <credential name="mssf-demo::Stop_State" />
     <credential name="mssf-demo::Clean_State" />
+    <credential name="mssf-demo::SocketSetter" />
     <for path="/usr/bin/mssf-client" />
   </request>
 </aegis>
