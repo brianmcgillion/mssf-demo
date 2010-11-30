@@ -1,3 +1,9 @@
+libcreds2-qt (0.5) unstable; urgency=low
+
+  * Fix export declaration
+
+ -- Brian McGillion <brian.mcgillion@symbio.com>  Tue, 30 Nov 2010 16:21:06 +0200
+
 libcreds2-qt (0.3) unstable; urgency=low
 
   * Fixes: NB#197628 - Libcreds2-Qt interface has incorrect scope in API file.
