@@ -26,6 +26,7 @@
 #include <QtCore/QObject>
 #include <QtDBus/QDBusContext>
 
+class SmackLabelIf;
 class Engine;
 
 class DBusService : public QObject, protected QDBusContext
@@ -65,6 +66,8 @@ public slots:
 private:
     //! The main engine to hand off the commands to..
     Engine *engine;
+    //! Find the smack label
+    SmackLabelIf *labelIf;
 };
 
 #endif // DBUSSERVICE_H

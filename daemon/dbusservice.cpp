@@ -23,11 +23,13 @@
 #include "dbusservice.h"
 #include "engine.h"
 #include "mssf-common.h"
+#include "smacklabelif.h"
 
 DBusService::DBusService(Engine *parent)
     :   QObject(parent),
       engine(parent)
 {
+    labelIf = new SmackLabelIf(this);
 }
 
 DBusService::~DBusService()
@@ -38,6 +40,18 @@ bool DBusService::setState(int state)
 {
     if (state >= Mssf::Undefined)
         sendErrorReply(QDBusError::NotSupported, "Unknown state requested");
+
+    QString serviceName = message().service();
+    QDBusPendingReply<QString> reply;
+    reply = labelIf->getConnectionLabel(serviceName);
+    reply.waitForFinished();
+    if (!reply.isValid())
+    {
+      qDebug() << reply.error().message();
+        return false;
+    }
+
+    qDebug() << "The label is :  " << reply.value();
 
     return engine->setState(state);
 }

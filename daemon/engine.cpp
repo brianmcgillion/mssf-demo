@@ -27,6 +27,7 @@
 #include "mssf-common.h"
 #include "configwriter.h"
 
+#include <smack.h>
 #include <QtNetwork/QLocalSocket>
 
 Engine::Engine(QObject *parent)
@@ -65,8 +66,8 @@ bool Engine::initialize()
         return false;
     }
 
-    connect(sockServer, SIGNAL(newConnection()), this, SLOT(handleConnection()));
-    return startDBus();
+    return connect(sockServer, SIGNAL(newConnection()), this, SLOT(handleConnection()));
+    //return startDBus();
 }
 
 bool Engine::setState(int state)
@@ -105,8 +106,18 @@ bool Engine::startDBus()
 
 void Engine::handleConnection()
 {
+    char *label = NULL;
+
     QLocalSocket *sockClient = sockServer->nextPendingConnection();
     connect(sockClient, SIGNAL(disconnected()), sockClient, SLOT(deleteLater()));
+
+    if (smack_get_peer_label(sockClient->socketDescriptor(), &label) == -1)
+    {
+            qDebug() << "Could not read the label of the socket";
+            return;
+    }
+
+    qDebug() << "The label is : " << label;
 
     bool result = false;
     qint32 state = Mssf::Undefined;

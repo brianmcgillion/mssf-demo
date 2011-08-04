@@ -20,6 +20,7 @@
  * Author: Brian McGillion <brian.mcgillion@symbio.com>
  */
 
+#include <stdio.h>
 #include "engine.h"
 
 #include <QtCore/QCoreApplication>
@@ -28,7 +29,8 @@
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
-
+    freopen("/tmp/mssfd.log", "a+", stdout);
+    freopen("/tmp/mssfd.log", "a+", stderr);
     Engine engine(&a);
 
     if (!engine.initialize())

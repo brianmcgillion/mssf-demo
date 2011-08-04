@@ -2,16 +2,18 @@ QT       += core dbus network
 QT       -= gui
 
 TARGET = mssfd
-CONFIG   += console
+CONFIG   += console link_pkgconfig
 CONFIG   -= app_bundle
 TEMPLATE = app
+PKGCONFIG += libsmack
 
 SOURCES += main.cpp \
     dbusserviceifadaptor.cpp \
     configuration.cpp \
     dbusservice.cpp \
     engine.cpp \
-    configwriter.cpp
+    configwriter.cpp \
+    smacklabelif.cpp
 
 HEADERS += \
     dbusserviceifadaptor.h \
@@ -21,7 +23,8 @@ HEADERS += \
     engine.h \
     engineconfigs.h \
     mssf-common.h \
-    configwriter.h
+    configwriter.h \
+    smacklabelif.h
 
 OTHER_FILES += \
     com.meego.mssf.xml \
@@ -43,3 +46,5 @@ sharedHeader.path = $$(DESTDIR)/usr/include/mssf
 sharedHeader.file = mssf-common.h
 
 INSTALLS += target service configuration dbusInterface sharedHeader
+
+
