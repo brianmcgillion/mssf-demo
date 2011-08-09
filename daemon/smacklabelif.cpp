@@ -9,11 +9,15 @@ namespace Constants
     static const QLatin1String DBusService("org.freedesktop.DBus");
     //! DBus path
     static const QLatin1String DBusPath("/");
+    //! The interface the methods belongs to
+    const char * const DBusInterface("org.freedesktop.DBus");
+    //! The method to call to get the connection label
+    static const QLatin1String DBusMethod("GetConnectionSmackLabel");
 }
 
 SmackLabelIf::SmackLabelIf(QObject *parent)
-  : QDBusAbstractInterface(Constants::DBusService, Constants::DBusPath, "",
-                             QDBusConnection::systemBus(), parent)
+  : QDBusAbstractInterface(Constants::DBusService, Constants::DBusPath, Constants::DBusInterface,
+                           QDBusConnection::systemBus(), parent)
 {
 }
 
@@ -26,5 +30,5 @@ QDBusPendingReply<QString> SmackLabelIf::getConnectionLabel(const QString &servi
 {
     QList<QVariant> argumentList;
     argumentList << qVariantFromValue(service);
-    return asyncCallWithArgumentList(QLatin1String("GetConnectionLabel"), argumentList);
+    return asyncCallWithArgumentList(Constants::DBusMethod, argumentList);
 }

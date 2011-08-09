@@ -66,8 +66,8 @@ bool Engine::initialize()
         return false;
     }
 
-    return connect(sockServer, SIGNAL(newConnection()), this, SLOT(handleConnection()));
-    //return startDBus();
+    connect(sockServer, SIGNAL(newConnection()), this, SLOT(handleConnection()));
+    return startDBus();
 }
 
 bool Engine::setState(int state)
