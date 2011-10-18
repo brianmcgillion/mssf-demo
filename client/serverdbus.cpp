@@ -33,6 +33,8 @@ ServerDBus::ServerDBus(QObject *parent)
 {
     interface = new MssfDbusIf(QLatin1String("com.meego.mssf"), QLatin1String("/"),
                                QDBusConnection::sessionBus(), this);
+
+    connect(interface, SIGNAL(stateChanged(int)), this, SLOT(stateChanged(int)));
 }
 
 ServerDBus::~ServerDBus()
@@ -68,4 +70,9 @@ void ServerDBus::replyReceived(QDBusPendingCallWatcher *watcher)
     }
 
     watcher->deleteLater();
+}
+
+void ServerDBus::stateChanged(int state)
+{
+    qDebug() << "Signal received from server for state change: " << state;
 }

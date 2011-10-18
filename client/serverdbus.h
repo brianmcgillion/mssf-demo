@@ -55,6 +55,12 @@ public slots:
       */
     void setState(Mssf::State state);
 
+    /*!
+      * \brief listen for the signal from the server saying that that the state is changed
+      * \param state The value of the state that is changed
+      */
+    void stateChanged(int state);
+
 private slots:
 
     /*!

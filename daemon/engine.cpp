@@ -27,7 +27,7 @@
 #include "mssf-common.h"
 #include "configwriter.h"
 
-#include <smack.h>
+#include <sys/smack.h>
 #include <QtNetwork/QLocalSocket>
 
 Engine::Engine(QObject *parent)
@@ -111,7 +111,8 @@ void Engine::handleConnection()
     QLocalSocket *sockClient = sockServer->nextPendingConnection();
     connect(sockClient, SIGNAL(disconnected()), sockClient, SLOT(deleteLater()));
 
-    if (smack_get_peer_label(sockClient->socketDescriptor(), &label) == -1)
+    label = smack_get_peer_label(sockClient->socketDescriptor());
+    if (!label)
     {
             qDebug() << "Could not read the label of the socket";
             return;
