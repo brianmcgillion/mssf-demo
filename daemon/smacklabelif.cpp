@@ -17,7 +17,7 @@ namespace Constants
 
 SmackLabelIf::SmackLabelIf(QObject *parent)
   : QDBusAbstractInterface(Constants::DBusService, Constants::DBusPath, Constants::DBusInterface,
-                           QDBusConnection::systemBus(), parent)
+                           QDBusConnection::sessionBus(), parent)
 {
 }
 

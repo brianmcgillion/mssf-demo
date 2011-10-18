@@ -32,7 +32,7 @@ ServerDBus::ServerDBus(QObject *parent)
       interface(NULL)
 {
     interface = new MssfDbusIf(QLatin1String("com.meego.mssf"), QLatin1String("/"),
-                               QDBusConnection::systemBus(), this);
+                               QDBusConnection::sessionBus(), this);
 }
 
 ServerDBus::~ServerDBus()

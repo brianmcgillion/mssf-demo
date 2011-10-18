@@ -33,10 +33,10 @@ OTHER_FILES += \
 
 target.path = $$(DESTDIR)/usr/bin
 
-service.path = $$(DESTDIR)/usr/share/dbus-1/system-services
+service.path = $$(DESTDIR)/usr/share/dbus-1/services
 service.files = com.meego.mssf.service
 
-configuration.path = $$(DESTDIR)/etc/dbus-1/system.d
+configuration.path = $$(DESTDIR)/etc/dbus-1/session.d
 configuration.files = com.meego.mssf.conf
 
 dbusInterface.path = $$(DESTDIR)/usr/share/dbus-1/interfaces

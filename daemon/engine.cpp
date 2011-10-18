@@ -88,7 +88,7 @@ bool Engine::startDBus()
     dbusService = new DBusService(this);
     new DBusServiceIfAdaptor(dbusService);
 
-    QDBusConnection connection = QDBusConnection::systemBus();
+    QDBusConnection connection = QDBusConnection::sessionBus();
     if (!connection.registerObject("/", dbusService))
     {
         qCritical() << "Failed to register Object for DBus: " << connection.lastError().message();
@@ -117,7 +117,7 @@ void Engine::handleConnection()
             return;
     }
 
-    qDebug() << "The label is : " << label;
+    qDebug() << "The socket label is : " << label;
 
     bool result = false;
     qint32 state = Mssf::Undefined;

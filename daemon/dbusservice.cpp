@@ -51,7 +51,7 @@ bool DBusService::setState(int state)
         return false;
     }
 
-    qDebug() << "The label is :  " << reply.value();
+    qDebug() << "The Dbus label is :  " << reply.value();
 
     return engine->setState(state);
 }
