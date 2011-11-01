@@ -12,7 +12,7 @@ namespace Constants
     //! The interface the methods belongs to
     const char * const DBusInterface("org.freedesktop.DBus");
     //! The method to call to get the connection label
-    static const QLatin1String DBusMethod("GetConnectionSmackLabel");
+    static const QLatin1String DBusMethod("GetConnectionSmackContext");
 }
 
 SmackLabelIf::SmackLabelIf(QObject *parent)
