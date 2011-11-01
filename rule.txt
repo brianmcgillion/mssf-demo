@@ -3,5 +3,5 @@ _ t_mssfd rx
 t_client _ w
 _ t_client xr
 t_client t_setState w
-t_client t_signal w
+t_client t_signal r
 t_client t_mssfd w
